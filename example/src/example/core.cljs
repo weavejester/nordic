@@ -1,6 +1,7 @@
-(ns example.core)
+(ns example.core
+  (:require [brutha.core :as br]
+            [nordic.core :refer [html]]))
 
-(defn foo
-  "I don't do a whole lot."
-  [x]
-  (println x "Hello, World!"))
+(br/mount
+ (html [:p "Hello World"])
+ (.getElementById js/document "test"))
