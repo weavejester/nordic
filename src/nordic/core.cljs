@@ -1,5 +1,9 @@
 (ns nordic.core
-  (:require [flupot.dom :as dom]))
+  (:require [flupot.dom :as dom])
+  (:require-macros [nordic.core :as core]))
 
-(defn html [_]
-  (dom/p "Hello World"))
+(def ^:private tag-lookup
+  (core/generate-tag-lookup))
+
+(defn html [[tag & content]]
+  (apply (tag-lookup tag) content))
