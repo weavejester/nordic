@@ -20,6 +20,5 @@
     (.apply func nil args)))
 
 (defn html [content]
-  (if (vector? content)
-    (render-vector content)
-    content))
+  {:pre (vector? content)}
+  (render-vector content))
