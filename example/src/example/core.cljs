@@ -3,5 +3,10 @@
             [nordic.core :refer [html]]))
 
 (br/mount
- (html [:p "Hello " [:strong "World"]])
+ (html
+  [:div
+   [:p "Hello " [:strong "World"]]
+   [:ul
+    (for [x (range 5)]
+      [:li x])]])
  (.getElementById js/document "test"))

@@ -5,10 +5,19 @@
 (def ^:private tag-lookup
   (core/generate-tag-lookup))
 
-(declare html)
+(declare render-vector)
 
-(defn- render-vector [[tag & content]]
-  (apply (tag-lookup tag) (map html content)))
+(defn- flatten-args! [args content]
+  (doseq [val content]
+    (cond
+      (vector? val) (.push args (render-vector val))
+      (seq? val)    (flatten-args! args val)
+      :else         (.push args val))))
+
+(defn- render-vector [content]
+  (let [func (tag-lookup (first content))
+        args (doto (array) (flatten-args! (rest content)))]
+    (.apply func nil args)))
 
 (defn html [content]
   (if (vector? content)
