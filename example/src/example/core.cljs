@@ -5,6 +5,7 @@
 (br/mount
  (html
   [:div
+   {:class "example"}
    [:p "Hello " [:strong "World"]]
    [:ul
     (for [x (range 5)]
