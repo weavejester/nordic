@@ -3,5 +3,5 @@
             [nordic.core :refer [html]]))
 
 (br/mount
- (html [:p "Hello World"])
+ (html [:p "Hello " [:strong "World"]])
  (.getElementById js/document "test"))

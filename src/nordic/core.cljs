@@ -5,5 +5,12 @@
 (def ^:private tag-lookup
   (core/generate-tag-lookup))
 
-(defn html [[tag & content]]
-  (apply (tag-lookup tag) content))
+(declare html)
+
+(defn- render-vector [[tag & content]]
+  (apply (tag-lookup tag) (map html content)))
+
+(defn html [content]
+  (if (vector? content)
+    (render-vector content)
+    content))
